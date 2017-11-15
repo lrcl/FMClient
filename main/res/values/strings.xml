@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Family Map</string>
+    <string name="hostTag">Server Host:</string>
+    <string name="portTag">Server Port:</string>
+    <string name="userNameTag">User Name:</string>
+    <string name="passwordTag">Password:</string>
+    <string name="fNameTag">First Name:</string>
+    <string name="lNameTag">Last Name:</string>
+    <string name="emailTag">Email:</string>
+    <string name="maleButton">Male</string>
+    <string name="femaleButton">Female</string>
+    <string name="loginButton">SIGN IN</string>
+    <string name="registerButton">REGISTER</string>
+</resources>
