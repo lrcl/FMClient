@@ -14,7 +14,7 @@ import com.google.gson.*;
 public class HttpClient{
     //sendGetRequest--sendPostRequest
     //sendDeleteRequest
-    public Response sendRequest(Request request, String requestMethod,URL url) {
+    public String sendRequest(Request request, String requestMethod,URL url) {
         try {
             //set URL
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -36,8 +36,7 @@ public class HttpClient{
                 sb.append(in.next());
             }
             String responseString = sb.toString();
-            Response response = new Response(responseString);
-            return response;
+            return responseString;
 
         } catch (Exception e) {
             e.printStackTrace();
