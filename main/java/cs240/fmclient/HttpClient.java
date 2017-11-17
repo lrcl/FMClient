@@ -1,38 +1,47 @@
 package cs240.fmclient;
 
 
-import android.util.Log;
 
-import java.io.IOException;
+import java.io.BufferedWriter;
+
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.Writer;
 import java.net.HttpURLConnection;
-import java.net.Socket;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
+
 import com.google.gson.*;
 
 public class HttpClient{
     //sendGetRequest--sendPostRequest
     //sendDeleteRequest
-    public void sendRequest(String request/*needs to be object*/, String requestMethod,URL url) {
+    public Response sendRequest(Request request, String requestMethod,URL url) {
         try {
+            //set URL
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.connect();
-            //Scanner in = new Scanner(connection.getInputStream());
-            Writer out = new OutputStreamWriter(connection.getOutputStream());
+            connection.setDoOutput(true);
+            connection.setRequestMethod(requestMethod);
+            connection.connect(); //don't necessarily need this line
+            //include JSON in body of request
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
             Gson gson = new Gson();
             String jsonStr = gson.toJson(request);
-            out.write(jsonStr); //is this right?
+            out.write(jsonStr);
+            //send request body
             out.flush();
+            out.close();
+            //read response from server
+            Scanner in = new Scanner(connection.getInputStream());
+            StringBuilder sb = new StringBuilder();
+            while(in.hasNext()) {
+                sb.append(in.next());
+            }
+            String responseString = sb.toString();
+            Response response = new Response(responseString);
+            return response;
 
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
-    //public URL
 }
