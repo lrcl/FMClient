@@ -7,38 +7,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class LoginFragment extends Fragment{
-    Proxy proxy = new Proxy();
+
+    RadioGroup gender;
+    Button login;
+    Button register;
+    int genderButton;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //Proxy proxy = new Proxy();
         View view = inflater.inflate(R.layout.login_fragment,container,false);
-        RadioButton radio1 = (RadioButton) view.findViewById(R.id.maleButton);
-        RadioButton radio2 = (RadioButton) view.findViewById(R.id.femaleButton);
-        radio1.setOnClickListener(new View.OnClickListener() {
+        gender = (RadioGroup) view.findViewById(R.id.genderButtons);
+        gender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getGender();
+                genderButton = gender.getCheckedRadioButtonId();
             }
         });
-        radio2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getGender();
-            }
-        });
-        final Button login = (Button) view.findViewById(R.id.loginButton);
-        Button register = (Button) view.findViewById(R.id.registerButton);
+        login = (Button) view.findViewById(R.id.loginButton);
+        register = (Button) view.findViewById(R.id.registerButton);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                proxy.login("","","");
+                new LoginTask().execute();
             }
         });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                proxy.register();
+                //proxy.register();
             }
         });
         return view;
