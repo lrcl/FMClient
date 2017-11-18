@@ -5,11 +5,12 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/hostTag"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
         android:text="@string/hostTag" />
     <EditText
         android:layout_width="wrap_content"
@@ -18,11 +19,11 @@
         android:id="@+id/hostInput"
         android:inputType="text"/>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="55dp"
         android:id="@+id/portTag"
         android:text="@string/portTag" />
     <EditText
@@ -33,11 +34,11 @@
         android:id="@+id/portInput"
         android:inputType="text"/>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="90dp"
         android:id="@+id/userNameTag"
         android:text="@string/userNameTag" />
     <EditText
@@ -47,11 +48,11 @@
         android:layout_marginTop="70dp"
         android:id="@+id/userNameInput"
         android:inputType="text"/>
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="125dp"
         android:id="@+id/passwordTag"
         android:text="@string/passwordTag" />
     <EditText
@@ -61,11 +62,11 @@
         android:layout_marginTop="105dp"
         android:id="@+id/passwordInput"
         android:inputType="textPassword"/>
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="160dp"
         android:id="@+id/fNameTag"
         android:text="@string/fNameTag" />
     <EditText
@@ -75,11 +76,11 @@
         android:layout_marginTop="140dp"
         android:id="@+id/fNameInput"
         android:inputType="textPersonName"/>
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="175dp"
+        android:layout_marginTop="195dp"
         android:id="@+id/lNameTag"
         android:text="@string/lNameTag" />
     <EditText
@@ -89,11 +90,11 @@
         android:layout_marginTop="175dp"
         android:id="@+id/lNameInput"
         android:inputType="textPersonName"/>
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="230dp"
         android:id="@+id/emailTag"
         android:text="@string/emailTag" />
     <EditText
@@ -107,7 +108,7 @@
         android:id="@+id/genderButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="257dp"
+        android:layout_marginTop="260dp"
         android:layout_marginLeft="110dp"
         >
 
@@ -124,11 +125,11 @@
             android:text="@string/femaleButton"
             />
     </RadioGroup>
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="245dp"
+        android:layout_marginTop="260dp"
         android:id="@+id/genderTag"
         android:text="Gender: " />
     <Button
