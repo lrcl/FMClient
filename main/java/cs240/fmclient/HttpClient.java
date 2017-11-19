@@ -20,7 +20,7 @@ public class HttpClient{
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setRequestMethod(requestMethod);
-            connection.connect(); //don't necessarily need this line
+           // connection.connect(); //don't necessarily need this line
             //include JSON in body of request
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
             Gson gson = new Gson();

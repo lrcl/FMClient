@@ -13,8 +13,8 @@ public class Proxy {
             String port = strings[1];
             String userName = strings[2];
             String password = strings[3];
-            String loginUrl = PROTOCOL + host + ":" + port + "/user/login";
-            URL url = new URL(loginUrl);
+          //  String loginUrl = PROTOCOL + host + ":" + port + "/user/login";
+            URL url = new URL("http://10.0.2.2:8888/user/login");
             String requestMethod = "GET";
             Request loginRequest = new LoginRequest(userName, password);
             HttpClient client = new HttpClient();
