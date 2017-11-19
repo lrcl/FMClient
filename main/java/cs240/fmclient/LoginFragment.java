@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import java.util.ArrayList;
+
 public class LoginFragment extends Fragment implements View.OnClickListener{
 
     private EditText port;
@@ -24,13 +26,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     private RadioButton female;
     private RadioButton male;
     private RadioGroup gender;
-    private Button login;
+    private RadioButton login;
     private Button register;
     private int genderButton;
 
+    private ArrayList<String> inputStrings = new ArrayList<String>();
 
 
-//    private String[] userInput;
+
+
+    //    private String[] userInput;
     private String hostname;
     private String portname;
     private String username;
@@ -76,7 +81,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         male = (RadioButton) view.findViewById(R.id.maleButton);
         male.setOnClickListener(this);
 //        gender.setOnCheckedChangeListener(this);
-        login = (Button) view.findViewById(R.id.loginButton);
+        login = (RadioButton) view.findViewById(R.id.loginButton);
         login.setOnClickListener(this);
 
 
@@ -101,58 +106,47 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         int counter = 0;
-        if(v.getId() == R.id.hostInput) {
-            hostname = host.getText().toString();
-            counter++;
+        if(!(host.getText().toString().equals(""))) {
+            this.hostname= host.getText().toString();
 //            System.out.println(hostname);
 
         }
-        if(v.getId() == R.id.portInput){
-            portname = port.getText().toString();
-            counter++;
+        if(!(port.getText().toString().equals(""))){
+            this.portname = port.getText().toString();
 //            System.out.println(portname);
         }
-        if(v.getId() == R.id.userNameInput) {
-            username = userName.getText().toString();
-            counter++;
+        if(!(userName.getText().toString().equals(""))) {
+            this.username = userName.getText().toString();
 //            System.out.println(username);
         }
-        if(v.getId() == R.id.passwordInput) {
-            pword = password.getText().toString();
-            counter++;
+        if(!(password.getText().toString().equals(""))) {
+            this.pword = password.getText().toString();
 //            System.out.println(pword);
         }
-        if(v.getId() == R.id.fNameInput) {
-            fname = firstName.getText().toString();
-            counter++;
+        if(!(firstName.getText().toString().equals(""))) {
+            this.fname = firstName.getText().toString();
 //            System.out.println(fname);
         }
-        if(v.getId() == R.id.lNameInput) {
-            lname = lastName.getText().toString();
-            counter++;
+        if(!(lastName.getText().toString().equals(""))) {
+            this.lname = lastName.getText().toString();
 //            System.out.println(lname);
         }
-        if(v.getId() == R.id.emailInput) {
-            emailIn = email.getText().toString();
-            counter++;
+        if(!(email.getText().toString().equals(""))) {
+            this.emailIn = email.getText().toString();
+//            counter++;
         }
-        if(v.getId() == R.id.genderButtons) {
             if(female.isChecked()) {
-                genderIn = "f";
+                this.genderIn = "f";
             }
             if(male.isChecked()) {
-                genderIn = "m";
+                this.genderIn = "m";
             }
-            counter++;
-        }
-        if(v.getId() == R.id.loginButton) {
+       // if(v.getId() == R.id.loginButton) {
 
-            counter++;
-        }
-        if(counter >= 9) {
-            String[] userInput = {hostname,portname,username,pword,fname,lname,emailIn,genderIn};
+        //}
+        if(login.isChecked()) {
             System.out.println("LOGIN BUTTON CLICKED");
-            System.out.println("portnumber: " + portname);
+            String[] userInput = {hostname,portname,username,pword,fname,lname,emailIn,genderIn};
             new LoginTask().execute(userInput);
         }
 //        System.out.println("end method ----------------------");
