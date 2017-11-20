@@ -27,7 +27,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private RadioButton female;
     private RadioButton male;
     private RadioGroup gender;
-    private RadioButton login;
+    private Button login;
     private RadioButton register;
     private int genderButton;
 
@@ -50,37 +50,37 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 //    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        super.onCreateView(inflater,container,savedInstanceState);
-        final View view = inflater.inflate(R.layout.login_fragment, container, false);
+        super.onCreateView(inflater,container,savedInstanceState);
+        View view = inflater.inflate(R.layout.login_fragment, container, false);
         host = (EditText) view.findViewById(R.id.hostInput);
-        host.setOnClickListener(this);
+       // host.setOnClickListener(this);
 
         port = (EditText) view.findViewById(R.id.portInput);
-        port.setOnClickListener(this);
+     //   port.setOnClickListener(this);
 
         userName = (EditText) view.findViewById(R.id.userNameInput);
-        userName.setOnClickListener(this);
+       // userName.setOnClickListener(this);
 
         password = (EditText) view.findViewById(R.id.passwordInput);
-        password.setOnClickListener(this);
+       // password.setOnClickListener(this);
 
         firstName = (EditText) view.findViewById(R.id.fNameInput);
-        firstName.setOnClickListener(this);
+       // firstName.setOnClickListener(this);
 
         lastName = (EditText) view.findViewById(R.id.lNameInput);
-        lastName.setOnClickListener(this);
+       // lastName.setOnClickListener(this);
 
         email = (EditText) view.findViewById(R.id.emailInput);
-        email.setOnClickListener(this);
+//        email.setOnClickListener(this);
 
 //        gender = (RadioGroup) view.findViewById(R.id.genderButtons);
         female = (RadioButton) view.findViewById(R.id.femaleButton);
-        female.setOnClickListener(this);
+  //      female.setOnClickListener(this);
 
         male = (RadioButton) view.findViewById(R.id.maleButton);
-        male.setOnClickListener(this);
+    //    male.setOnClickListener(this);
 //        gender.setOnCheckedChangeListener(this);
-        login = (RadioButton) view.findViewById(R.id.loginButton);
+        login = (Button) view.findViewById(R.id.loginButton);
         login.setOnClickListener(this);
 
         register = (RadioButton) view.findViewById(R.id.registerButton);
@@ -92,11 +92,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         int counter = 0;
-        if (!(host.getText().toString().equals(""))) {
+   //     if (!(host.getText().toString().equals(""))) {
             this.hostname = host.getText().toString();
 //            System.out.println(hostname);
 
-        }
+     //   }
         if (!(port.getText().toString().equals(""))) {
             this.portname = port.getText().toString();
 //            System.out.println(portname);
@@ -127,14 +127,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         if (male.isChecked()) {
             this.genderIn = "m";
         }
-        // if(v.getId() == R.id.loginButton) {
-
-        //}
-        if (login.isChecked()) {
-            System.out.println("LOGIN BUTTON CLICKED");
-            String[] userInput = {hostname, portname, username, pword, fname, lname, emailIn, genderIn};
-            new LoginTask(getActivity().getApplicationContext()).execute(userInput);
+         if(((Button)v).getText().toString().equals("SIGN IN")) {
+            System.out.println("login button matches/clicked");
         }
+  //      if (login.isChecked()) {
+    //        System.out.println("LOGIN BUTTON CLICKED");
+      //      String[] userInput = {hostname, portname, username, pword, fname, lname, emailIn, genderIn};
+        //    new LoginTask(getActivity().getApplicationContext()).execute(userInput);
+        //}
         if (register.isChecked()) {
             System.out.println("REGISTER BUTTON CLICKED");
             String[] userInput = {hostname, portname, username, pword, fname, lname, emailIn, genderIn};

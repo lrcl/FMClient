@@ -8,13 +8,9 @@
     tools:context="cs240.fmclient.MainActivity">
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <fragment
-            android:id="@+id/login_fragment"
-            android:name="cs240.fmclient.LoginFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/login_fragment"
-            />
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_container"
+        >
+
     </FrameLayout>
 </FrameLayout>

@@ -20,6 +20,9 @@ public class LoginTask extends AsyncTask<String, String, String> {
         String firstLast = "";
         Proxy proxy = new Proxy();
         loginResults = proxy.login(strings);
+        if(loginResults.equals("null")) {
+            return "";
+        }
         char[] lr = loginResults.toCharArray();
         if(lr[4] != 'm') {
             System.out.println(loginResults);
