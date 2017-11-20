@@ -55,7 +55,7 @@ public class Proxy {
 
     public String findPersons(String[] strings) {
         try{
-            URL url = new URL("http://10.0.2.2:8888/person/"); //change localhost to 10.0.2.2 /NOTE: NOT USING INPUT VARIABLES FOR URL
+            URL url = new URL("http://10.0.2.2:8888/person"); //change localhost to 10.0.2.2 /NOTE: NOT USING INPUT VARIABLES FOR URL
             String authToken = strings[0];
             String requestMethod = "GET";
             HttpClient client = new HttpClient();

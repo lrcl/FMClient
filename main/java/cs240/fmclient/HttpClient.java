@@ -4,6 +4,7 @@ package cs240.fmclient;
 
 import java.io.BufferedWriter;
 
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -27,7 +28,6 @@ public class HttpClient{
             String jsonStr = gson.toJson(request);
             out.write(jsonStr);
             //send request body
-            out.flush();
             out.close();
             //read response from server
             Scanner in = new Scanner(connection.getInputStream());

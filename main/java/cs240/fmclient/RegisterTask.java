@@ -12,8 +12,13 @@ class RegisterTask extends AsyncTask<String, String, String> {
         System.out.println("line 12");
         if(registerResults != null) {
             System.out.println(registerResults);
-            new FamilyDataTask().execute(registerResults);
+           // new FamilyDataTask().execute(registerResults);
         }
         return null;
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+
     }
 }

@@ -1,6 +1,7 @@
 package cs240.fmclient;
 
 import android.app.Fragment;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -14,7 +15,7 @@ import android.widget.RadioGroup;
 
 import java.util.ArrayList;
 
-public class LoginFragment extends Fragment implements View.OnClickListener{
+public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private EditText port;
     private EditText host;
@@ -31,8 +32,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     private int genderButton;
 
     private ArrayList<String> inputStrings = new ArrayList<String>();
-
-
 
 
     //    private String[] userInput;
@@ -52,7 +51,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //        super.onCreateView(inflater,container,savedInstanceState);
-        final View view = inflater.inflate(R.layout.login_fragment,container,false);
+        final View view = inflater.inflate(R.layout.login_fragment, container, false);
         host = (EditText) view.findViewById(R.id.hostInput);
         host.setOnClickListener(this);
 
@@ -93,52 +92,52 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         int counter = 0;
-        if(!(host.getText().toString().equals(""))) {
-            this.hostname= host.getText().toString();
+        if (!(host.getText().toString().equals(""))) {
+            this.hostname = host.getText().toString();
 //            System.out.println(hostname);
 
         }
-        if(!(port.getText().toString().equals(""))){
+        if (!(port.getText().toString().equals(""))) {
             this.portname = port.getText().toString();
 //            System.out.println(portname);
         }
-        if(!(userName.getText().toString().equals(""))) {
+        if (!(userName.getText().toString().equals(""))) {
             this.username = userName.getText().toString();
 //            System.out.println(username);
         }
-        if(!(password.getText().toString().equals(""))) {
+        if (!(password.getText().toString().equals(""))) {
             this.pword = password.getText().toString();
 //            System.out.println(pword);
         }
-        if(!(firstName.getText().toString().equals(""))) {
+        if (!(firstName.getText().toString().equals(""))) {
             this.fname = firstName.getText().toString();
 //            System.out.println(fname);
         }
-        if(!(lastName.getText().toString().equals(""))) {
+        if (!(lastName.getText().toString().equals(""))) {
             this.lname = lastName.getText().toString();
 //            System.out.println(lname);
         }
-        if(!(email.getText().toString().equals(""))) {
+        if (!(email.getText().toString().equals(""))) {
             this.emailIn = email.getText().toString();
 //            counter++;
         }
-            if(female.isChecked()) {
-                this.genderIn = "f";
-            }
-            if(male.isChecked()) {
-                this.genderIn = "m";
-            }
-       // if(v.getId() == R.id.loginButton) {
+        if (female.isChecked()) {
+            this.genderIn = "f";
+        }
+        if (male.isChecked()) {
+            this.genderIn = "m";
+        }
+        // if(v.getId() == R.id.loginButton) {
 
         //}
-        if(login.isChecked()) {
+        if (login.isChecked()) {
             System.out.println("LOGIN BUTTON CLICKED");
-            String[] userInput = {hostname,portname,username,pword,fname,lname,emailIn,genderIn};
-            new LoginTask().execute(userInput);
+            String[] userInput = {hostname, portname, username, pword, fname, lname, emailIn, genderIn};
+            new LoginTask(getActivity().getApplicationContext()).execute(userInput);
         }
-        if(register.isChecked()) {
+        if (register.isChecked()) {
             System.out.println("REGISTER BUTTON CLICKED");
-            String[] userInput = {hostname,portname,username,pword,fname,lname,emailIn,genderIn};
+            String[] userInput = {hostname, portname, username, pword, fname, lname, emailIn, genderIn};
             new RegisterTask().execute(userInput);
         }
 //        System.out.println("end method ----------------------");
