@@ -18,7 +18,6 @@ public class LoginTask extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... strings) {
         String firstLast = "";
-        String errorMessage = "{" + "\"message\":" + "\"unable to log in\"" + "}";
         Proxy proxy = new Proxy();
         loginResults = proxy.login(strings);
         char[] lr = loginResults.toCharArray();

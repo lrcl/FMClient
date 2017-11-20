@@ -138,7 +138,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         if (register.isChecked()) {
             System.out.println("REGISTER BUTTON CLICKED");
             String[] userInput = {hostname, portname, username, pword, fname, lname, emailIn, genderIn};
-            new RegisterTask().execute(userInput);
+            new RegisterTask(getActivity().getApplicationContext()).execute(userInput);
         }
 //        System.out.println("end method ----------------------");
     }
