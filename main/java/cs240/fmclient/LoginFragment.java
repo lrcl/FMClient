@@ -27,7 +27,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     private RadioButton male;
     private RadioGroup gender;
     private RadioButton login;
-    private Button register;
+    private RadioButton register;
     private int genderButton;
 
     private ArrayList<String> inputStrings = new ArrayList<String>();
@@ -84,21 +84,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         login = (RadioButton) view.findViewById(R.id.loginButton);
         login.setOnClickListener(this);
 
-
-//            @Override
-//            public void onClick(View v) {
-//                View parent = (View)v.getParent();
-//                EditText temp = parent.findViewById(R.id.hostInput);
-//                System.out.println("hehehehe: "+ temp.getText().toString());
-//                System.out.println(host.toString());
-//                System.out.println("hiiii: " + host.getText().toString());
-//                System.out.println("name: " + LoginFragment.this.hostInput[0]);
-//                EditText[] input = {host};
-//                testHost(input, view);
-//                //new LoginTask().execute(input); //need parameters
-//            }
-
-        register = (Button) view.findViewById(R.id.registerButton);
+        register = (RadioButton) view.findViewById(R.id.registerButton);
+        register.setOnClickListener(this);
 
         return view;
     }
@@ -149,25 +136,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             String[] userInput = {hostname,portname,username,pword,fname,lname,emailIn,genderIn};
             new LoginTask().execute(userInput);
         }
+        if(register.isChecked()) {
+            System.out.println("REGISTER BUTTON CLICKED");
+            String[] userInput = {hostname,portname,username,pword,fname,lname,emailIn,genderIn};
+            new RegisterTask().execute(userInput);
+        }
 //        System.out.println("end method ----------------------");
     }
 
-//    public void testHost(EditText[] input, View view) {
-//        host = (EditText) view.findViewById(R.id.hostInput);
-//        if(input[0] == null) {
-//            System.out.println("host is null in testHost()");
-//        }
-//        else {
-//            System.out.println("host is NOT Null");
-//            System.out.println("get text" + host.getText().toString());
-//            host.setText("ahgahghagh");
-//            System.out.println("yaaaaoooo" + host.getText().toString());
-//        }
-//    }
-  //  public void onClick(View v) {
-    //    this.portInput=  port.getText().toString();
-//
- //       System.out.println("name: " + this.portInput);
-
-  //  }
+    public LoginFragment() {}
 }

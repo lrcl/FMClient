@@ -15,7 +15,7 @@ public class LoginTask extends AsyncTask<String, Void, String> {
         loginResults = proxy.login(strings);
         if(loginResults != null) {
            System.out.println(loginResults);
-            // new FamilyDataTask().execute(loginResults);
+           new FamilyDataTask().execute(loginResults);
         }
         return null;
     }

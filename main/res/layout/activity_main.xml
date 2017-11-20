@@ -6,12 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="cs240.fmclient.MainActivity">
-
-    <fragment
-        android:id="@+id/login_fragment"
-        android:name="cs240.fmclient.LoginFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/login_fragment"
-        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <fragment
+            android:id="@+id/login_fragment"
+            android:name="cs240.fmclient.LoginFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/login_fragment"
+            />
+    </FrameLayout>
 </FrameLayout>

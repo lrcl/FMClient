@@ -14,7 +14,7 @@ public class Proxy {
             String userName = strings[2];
             String password = strings[3];
           //  String loginUrl = PROTOCOL + host + ":" + port + "/user/login";
-            URL url = new URL("http://10.0.2.2:8888/user/login");
+            URL url = new URL("http://10.0.2.2:8888/user/login"); //change localhost to 10.0.2.2/NOTE, NOT USING INPUT VARIABLES FOR URL
             String requestMethod = "GET";
             Request loginRequest = new LoginRequest(userName, password);
             HttpClient client = new HttpClient();
@@ -39,14 +39,31 @@ public class Proxy {
             String gender = registerInfo[7];
             //String username, String password, String email, String firstname, String lastname, String gender
             String registerUrl = PROTOCOL + host + ":" + port + "/user/register";
-            URL url = new URL(registerUrl);
+            URL url = new URL("http://10.0.2.2:8888/user/register"); //change localhost to 10.0.2.2 /NOTE: NOT USING INPUT VARIABLES FOR URL
             String requestMethod = "GET";
             HttpClient client = new HttpClient();
             Request registerRequest = new RegisterRequest(userName, password, email, firstName, lastName, gender);
             String response = client.sendRequest(registerRequest, requestMethod, url);
             Gson gson = new Gson();
             String jsonString = gson.toJson(response);
-            return  jsonString;
+            return jsonString;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String findPersons(String[] strings) {
+        try{
+            URL url = new URL("http://10.0.2.2:8888/person/"); //change localhost to 10.0.2.2 /NOTE: NOT USING INPUT VARIABLES FOR URL
+            String authToken = strings[0];
+            String requestMethod = "GET";
+            HttpClient client = new HttpClient();
+            Request allPersonsRequest = new AllPersonsRequest(authToken);
+            String response = client.sendRequest(allPersonsRequest, requestMethod, url);
+            Gson gson = new Gson();
+            String jsonString = gson.toJson(response);
+            return jsonString;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
