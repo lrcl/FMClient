@@ -3,6 +3,8 @@ package cs240.fmclient;
 
 import com.google.gson.Gson;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 
 public class Proxy {
@@ -47,7 +49,11 @@ public class Proxy {
             Gson gson = new Gson();
             String jsonString = gson.toJson(response);
             return jsonString;
-        } catch (Exception e) {
+        }catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return null;
         }
