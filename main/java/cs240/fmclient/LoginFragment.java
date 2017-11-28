@@ -26,15 +26,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText email;
     private RadioButton female;
     private RadioButton male;
-    private RadioGroup gender;
     private Button login;
-    private RadioButton register;
-    private int genderButton;
+    private Button register;
 
-    private ArrayList<String> inputStrings = new ArrayList<String>();
-
-
-    //    private String[] userInput;
     private String hostname;
     private String portname;
     private String username;
@@ -44,46 +38,24 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private String emailIn;
     private String genderIn;
 
-    //View view;
-//    public void updateHost(String host) {
-//        LoginFragment.this.hostInput[0] = host;
-//    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater,container,savedInstanceState);
         View view = inflater.inflate(R.layout.login_fragment, container, false);
         host = (EditText) view.findViewById(R.id.hostInput);
-       // host.setOnClickListener(this);
-
         port = (EditText) view.findViewById(R.id.portInput);
-     //   port.setOnClickListener(this);
-
         userName = (EditText) view.findViewById(R.id.userNameInput);
-       // userName.setOnClickListener(this);
-
         password = (EditText) view.findViewById(R.id.passwordInput);
-       // password.setOnClickListener(this);
-
         firstName = (EditText) view.findViewById(R.id.fNameInput);
-       // firstName.setOnClickListener(this);
-
         lastName = (EditText) view.findViewById(R.id.lNameInput);
-       // lastName.setOnClickListener(this);
-
         email = (EditText) view.findViewById(R.id.emailInput);
-//        email.setOnClickListener(this);
-
-//        gender = (RadioGroup) view.findViewById(R.id.genderButtons);
         female = (RadioButton) view.findViewById(R.id.femaleButton);
-  //      female.setOnClickListener(this);
-
         male = (RadioButton) view.findViewById(R.id.maleButton);
-    //    male.setOnClickListener(this);
-//        gender.setOnCheckedChangeListener(this);
+
         login = (Button) view.findViewById(R.id.loginButton);
         login.setOnClickListener(this);
 
-        register = (RadioButton) view.findViewById(R.id.registerButton);
+        register = (Button) view.findViewById(R.id.registerButton);
         register.setOnClickListener(this);
 
         return view;
@@ -110,7 +82,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             String[] userInput = {hostname, portname, username, pword, fname, lname, emailIn, genderIn};
             new LoginTask(getActivity().getApplicationContext()).execute(userInput);
         }
-        if (register.isChecked()) {
+        if (((Button)v).getText().toString().equals("REGISTER")) {
             System.out.println("REGISTER BUTTON CLICKED");
             String[] userInput = {hostname, portname, username, pword, fname, lname, emailIn, genderIn};
             new RegisterTask(getActivity().getApplicationContext()).execute(userInput);

@@ -140,21 +140,14 @@
         android:layout_marginLeft="100dp"
         android:layout_marginTop="345dp"
         />
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
 
-
-        <RadioButton
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/registerButton"
             android:text="@string/registerButton"
-            android:layout_marginLeft="100dp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="345dp"
             />
-    </RadioGroup>
-
-
-
 
 </FrameLayout>
