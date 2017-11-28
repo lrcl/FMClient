@@ -15,6 +15,8 @@ public class LoginTask extends AsyncTask<String, String, String> {
 
     String loginResults;
     Context context;
+    String familyPersonData;
+    String familyEventData;
     @Override
     protected String doInBackground(String... strings) {
         String firstLast = "";
@@ -27,6 +29,11 @@ public class LoginTask extends AsyncTask<String, String, String> {
         if(lr[4] != 'm') {
             System.out.println(loginResults);
             //new FamilyDataTask().execute(loginResults);
+//            familyPersonData = proxy.findPersons(strings);
+            System.out.println(familyPersonData);
+//            familyEventData = proxy.findEvents(strings);
+            System.out.println(familyEventData);
+            //
             StringBuilder sb = new StringBuilder();
             sb.append(strings[4]);
             sb.append(" ");

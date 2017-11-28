@@ -5,9 +5,15 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 class RegisterTask extends AsyncTask<String, String, String> {
     String registerResults;
     Context context;
+    String familyPersonData;
+    String familyEventData;
     @Override
     protected String doInBackground(String... strings) {
         Proxy proxy = new Proxy();
@@ -23,7 +29,20 @@ class RegisterTask extends AsyncTask<String, String, String> {
         }
         else if(rr[4] != 'm') {
             System.out.println(registerResults);
-            new FamilyDataTask().execute(registerResults);
+           // new FamilyDataTask().execute(registerResults);
+            familyPersonData = proxy.findPersons(registerResults);
+            familyEventData = proxy.findEvents(registerResults);
+            System.out.println(familyPersonData);
+            System.out.println(familyEventData);
+            try {
+                JSONObject jsonPersons = new JSONObject(familyPersonData);
+                JSONObject jsonEvents = new JSONObject(familyEventData);
+                //convert to Person and Event objects? at the very least, pass back to mainactivity
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+           //
             StringBuilder sb = new StringBuilder();
             sb.append(strings[4]);
             sb.append(" ");

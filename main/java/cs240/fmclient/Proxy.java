@@ -2,17 +2,10 @@ package cs240.fmclient;
 
 
 import com.google.gson.Gson;
-import com.google.gson.JsonParser;
-import org.json.JSONArray;
-
-import org.json.*;
-import org.json.JSONObject;
-import org.json.simple.*;
-import org.json.simple.parser.JSONParser;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
 
 public class Proxy {
     String registerRequest;
@@ -20,9 +13,6 @@ public class Proxy {
     String PROTOCOL = "http://";
     public String login(String[] strings){
         try{
-            //String loginRequest = strings.toString();
-            //JSONParser parser = new JSONParser();
-            //JSONObject json = (JSONObject) parser.parse(loginRequest);
             String host = strings[0];
             String port = strings[1];
             String userName = strings[2];
@@ -44,12 +34,6 @@ public class Proxy {
     public String register(String[] registerInfo) {
         try{
             Gson gson = new Gson();
-//            registerRequest = Arrays.toString(registerInfo);
-//            System.out.println(registerRequest);
-//            JSONArray jsarray = new JSONArray(Arrays.asList(registerInfo));
-//            JSONParser parser = new JSONParser();
-//            JSONObject json = (JSONObject) parser.parse(jsarray);
-//            gson.toJson(registerInfo);
             String host = registerInfo[0];
             String port = registerInfo[1];
             String userName = registerInfo[2];
@@ -76,34 +60,24 @@ public class Proxy {
             return null;
         }
     }
-    public String findPersons(String[] strings) {
+    public String findPersons(String registerResults) {
         try{
-//            JSONParser parser = new JSONParser();
-//            JSONObject json = (JSONObject) parser.parse(strings[0]);
-//            String authToken = json.getString("authToken");
             Gson gson = new Gson();
-            //String jsonString = gson.toJson(strings[0]);
-//            String stuff = strings[0];
-//            allPersons = (RegisterResponse) gson.fromJson(stuff, Response.class);
-//            String authToken = allPersons.getAuthToken();
-
-            //18-24
-            String authToken = parseAuthToken(strings[0]);
-
-            URL url = new URL("http://10.0.2.2:8888/person"); //change localhost to 10.0.2.2 /NOTE: NOT USING INPUT VARIABLES FOR URL
-
+            String authToken = parseAuthToken(registerResults);
+            URL url = new URL("http://10.0.2.2:8888/person/"); //changed localhost to 10.0.2.2 /NOTE: NOT USING INPUT VARIABLES FOR URL
             Request blankRequestBody = new Request(); //?
             String requestMethod = "GET";
             HttpClient client = new HttpClient();
             String response = client.sendRequest(blankRequestBody, requestMethod, url, authToken);
-            String jsonString2 = gson.toJson(response);
-            return jsonString2;
+            String jsonString = gson.toJson(response);
+            return jsonString;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
     private String parseAuthToken(String info) {
+        //18-24
         StringBuilder sb = new StringBuilder();
         sb.append(info.charAt(18));
         sb.append(info.charAt(19));
@@ -114,6 +88,28 @@ public class Proxy {
         sb.append(info.charAt(24));
 
         return sb.toString();
+    }
+
+    public String findEvents(String registerResults) {
+
+        try {
+            Gson gson = new Gson();
+            String authToken = parseAuthToken(registerResults);
+            URL url = new URL("http://10.0.2.2:8888/event/"); //changed localhost to 10.0.2.2 /NOTE: NOT USING INPUT VARIABLES FOR URL
+            Request blankRequestBody = new Request(); //?
+            String requestMethod = "GET";
+            HttpClient client = new HttpClient();
+            String response = client.sendRequest(blankRequestBody, requestMethod, url, authToken);
+            String jsonString = gson.toJson(response);
+            return jsonString;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 }
 
