@@ -4,40 +4,40 @@ public class RegisterResponse extends Response {
     /** auth token */
     private String authToken;
     /** newly created username */
-    private String username;
+    private String userName;
     /** newly assigned personID */
-    private String personId;
+    private String personID;
 
     public String getAuthToken() {
         return authToken;
     }
 
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     public String getPersonId() {
-        return personId;
+        return personID;
     }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(authToken);
-        sb.append(username);
-        sb.append(personId);
+        sb.append(userName);
+        sb.append(personID);
         return sb.toString();
     }
     /** Constructor
      *
      * @param authToken
-     * @param username
-     * @param personId
+     * @param userName
+     * @param personID
      */
 
-    public RegisterResponse(String authToken, String username, String personId) {
+    public RegisterResponse(String authToken, String userName, String personID) {
         this.authToken = authToken;
-        this.username = username;
-        this.personId = personId;
+        this.userName = userName;
+        this.personID = personID;
     }
-    public RegisterResponse(){}
+//    public RegisterResponse(){}
 }

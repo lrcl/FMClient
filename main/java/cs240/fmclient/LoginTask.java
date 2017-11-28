@@ -47,8 +47,9 @@ public class LoginTask extends AsyncTask<String, String, String> {
         }
         else {
             //display logged in user's first and last name
-           Toast toast2 = Toast.makeText(context, firstLast,Toast.LENGTH_LONG );
-           toast2.show();
+            String displayString = "Logged in User " + firstLast;
+            Toast toast2 = Toast.makeText(context, displayString,Toast.LENGTH_LONG );
+            toast2.show();
         }
     }
     public LoginTask(Context context) {

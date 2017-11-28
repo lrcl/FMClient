@@ -23,7 +23,7 @@ class RegisterTask extends AsyncTask<String, String, String> {
         }
         else if(rr[4] != 'm') {
             System.out.println(registerResults);
-            //new FamilyDataTask().execute(loginResults);
+            new FamilyDataTask().execute(registerResults);
             StringBuilder sb = new StringBuilder();
             sb.append(strings[4]);
             sb.append(" ");
@@ -44,7 +44,8 @@ class RegisterTask extends AsyncTask<String, String, String> {
         }
         else {
             //display logged in user's first and last name
-            Toast toast2 = Toast.makeText(context, firstLast,Toast.LENGTH_LONG );
+            String displayString = "Registered New User" + " "  + firstLast;
+            Toast toast2 = Toast.makeText(context, displayString,Toast.LENGTH_LONG );
             toast2.show();
         }
     }

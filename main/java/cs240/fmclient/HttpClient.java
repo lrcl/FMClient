@@ -12,15 +12,20 @@ import java.util.Scanner;
 
 import com.google.gson.*;
 
+import org.json.JSONObject;
+
 public class HttpClient{
     //sendGetRequest--sendPostRequest
     //sendDeleteRequest
-    public String sendRequest(Request request, String requestMethod,URL url) {
+    public String sendRequest(Request request, String requestMethod, URL url, String authToken) {
         try {
             //set URL
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setRequestMethod(requestMethod);
+            if(!authToken.equals("")) {
+                connection.addRequestProperty("Authorization",authToken);
+            }
            // connection.connect(); //don't necessarily need this line
             //include JSON in body of request
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
