@@ -91,36 +91,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int counter = 0;
-   //     if (!(host.getText().toString().equals(""))) {
-            this.hostname = host.getText().toString();
-//            System.out.println(hostname);
 
-     //   }
-        if (!(port.getText().toString().equals(""))) {
-            this.portname = port.getText().toString();
-//            System.out.println(portname);
-        }
-        if (!(userName.getText().toString().equals(""))) {
-            this.username = userName.getText().toString();
-//            System.out.println(username);
-        }
-        if (!(password.getText().toString().equals(""))) {
-            this.pword = password.getText().toString();
-//            System.out.println(pword);
-        }
-        if (!(firstName.getText().toString().equals(""))) {
-            this.fname = firstName.getText().toString();
-//            System.out.println(fname);
-        }
-        if (!(lastName.getText().toString().equals(""))) {
-            this.lname = lastName.getText().toString();
-//            System.out.println(lname);
-        }
-        if (!(email.getText().toString().equals(""))) {
-            this.emailIn = email.getText().toString();
-//            counter++;
-        }
+        this.hostname = host.getText().toString();
+        this.portname = port.getText().toString();
+        this.username = userName.getText().toString();
+        this.pword = password.getText().toString();
+        this.fname = firstName.getText().toString();
+        this.lname = lastName.getText().toString();
+        this.emailIn = email.getText().toString();
         if (female.isChecked()) {
             this.genderIn = "f";
         }
@@ -128,13 +106,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             this.genderIn = "m";
         }
          if(((Button)v).getText().toString().equals("SIGN IN")) {
-            System.out.println("login button matches/clicked");
+            System.out.println("login button clicked");
+            String[] userInput = {hostname, portname, username, pword, fname, lname, emailIn, genderIn};
+            new LoginTask(getActivity().getApplicationContext()).execute(userInput);
         }
-  //      if (login.isChecked()) {
-    //        System.out.println("LOGIN BUTTON CLICKED");
-      //      String[] userInput = {hostname, portname, username, pword, fname, lname, emailIn, genderIn};
-        //    new LoginTask(getActivity().getApplicationContext()).execute(userInput);
-        //}
         if (register.isChecked()) {
             System.out.println("REGISTER BUTTON CLICKED");
             String[] userInput = {hostname, portname, username, pword, fname, lname, emailIn, genderIn};
