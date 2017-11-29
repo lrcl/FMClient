@@ -25,7 +25,6 @@ class RegisterTask extends AsyncTask<String, String, String> {
 
         registerResults = proxy.register(strings);
         StringBuilder sb = new StringBuilder(registerResults);
-        sb.insert(0,'{');
         registerResults = sb.toString();
         if(registerResults.equals("{\"null\"}")) {
             return "";
@@ -44,7 +43,9 @@ class RegisterTask extends AsyncTask<String, String, String> {
             System.out.println(familyEventData);
             Gson gson = new Gson();
             apr = gson.fromJson(familyPersonData, AllPersonsResponse.class);
-            System.out.println(familyPersonData);
+            aer = gson.fromJson(familyEventData, AllEventsResponse.class);
+
+
 
         } catch (JSONException e) {
             e.printStackTrace();

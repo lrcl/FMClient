@@ -37,13 +37,9 @@ public class HttpClient{
             Scanner in = new Scanner(connection.getInputStream());
             StringBuilder sb = new StringBuilder();
             while(in.hasNext()) {
-                if(in.next() != "\\") {
-                    sb.append(in.next());
-                }
+                sb.append(in.next());
             }
-           // sb.insert(0,'{');
             String responseString = sb.toString();
-            //responseString.charAt(0) = '{';
             return responseString;
 
         } catch (Exception e) {
