@@ -10,15 +10,17 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cs240.fmclient.Interface.TaskDataTransfer;
 import cs240.fmclient.Models.Person;
 
 class RegisterTask extends AsyncTask<String, String, String> {
-    String registerResults;
-    Context context;
-    String familyPersonData;
-    String familyEventData;
-    AllPersonsResponse apr;
-    AllEventsResponse aer;
+    public String registerResults;
+    public Context context;
+    public String familyPersonData;
+    public String familyEventData;
+    public AllPersonsResponse apr;
+    public AllEventsResponse aer;
+//    public TaskDataTransfer dataTransfer;
     @Override
     protected String doInBackground(String... strings) {
         Proxy proxy = new Proxy();
@@ -43,7 +45,7 @@ class RegisterTask extends AsyncTask<String, String, String> {
             Gson gson = new Gson();
             apr = gson.fromJson(familyPersonData, AllPersonsResponse.class);
             aer = gson.fromJson(familyEventData, AllEventsResponse.class);
-
+//            dataTransfer.getRelatives(apr); //can I do this here?
 
 
 

@@ -15,6 +15,9 @@ import android.widget.RadioGroup;
 
 import java.util.ArrayList;
 
+import cs240.fmclient.Interface.TaskDataTransfer;
+import cs240.fmclient.Models.Person;
+
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private EditText port;
@@ -38,9 +41,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private String emailIn;
     private String genderIn;
 
+    public Person[] familyPersons;
+//    public FragDataTransfer fragDataTransfer;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater,container,savedInstanceState);
+
         View view = inflater.inflate(R.layout.login_fragment, container, false);
         host = (EditText) view.findViewById(R.id.hostInput);
         port = (EditText) view.findViewById(R.id.portInput);
@@ -80,15 +87,28 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
          if(((Button)v).getText().toString().equals("SIGN IN")) {
             System.out.println("login button clicked");
             String[] userInput = {hostname, portname, username, pword, fname, lname, emailIn, genderIn};
-            new LoginTask(getActivity().getApplicationContext()).execute(userInput);
+            LoginTask loginTask = new LoginTask(getActivity().getApplicationContext());
+            loginTask.execute(userInput);
         }
         if (((Button)v).getText().toString().equals("REGISTER")) {
             System.out.println("REGISTER BUTTON CLICKED");
             String[] userInput = {hostname, portname, username, pword, fname, lname, emailIn, genderIn};
-            new RegisterTask(getActivity().getApplicationContext()).execute(userInput);
+            RegisterTask registerTask = new RegisterTask(getActivity().getApplicationContext());
+//            registerTask.dataTransfer = this;
+            registerTask.execute(userInput);
+//            fragDataTransfer.getRelatives(this.familyPersons);
         }
 //        System.out.println("end method ----------------------");
     }
 
     public LoginFragment() {}
+
+//    @Override
+//    public Person[] getRelatives(AllPersonsResponse apr) {
+//        this.familyPersons = apr.getData();
+//        return familyPersons;
+//    }
+//    public interface FragDataTransfer {
+//        public Person[] getRelatives(Person[] persons);
+//    }
 }
