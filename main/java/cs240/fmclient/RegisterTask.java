@@ -18,6 +18,7 @@ class RegisterTask extends AsyncTask<String, String, String> {
     String familyPersonData;
     String familyEventData;
     AllPersonsResponse apr;
+    AllEventsResponse aer;
     @Override
     protected String doInBackground(String... strings) {
         Proxy proxy = new Proxy();
@@ -39,11 +40,10 @@ class RegisterTask extends AsyncTask<String, String, String> {
             }
             familyPersonData = proxy.findPersons(registerResultsJO);
             familyEventData = proxy.findEvents(registerResultsJO);
-            System.out.println(familyPersonData);
-            System.out.println(familyEventData);
             Gson gson = new Gson();
             apr = gson.fromJson(familyPersonData, AllPersonsResponse.class);
             aer = gson.fromJson(familyEventData, AllEventsResponse.class);
+
 
 
 
