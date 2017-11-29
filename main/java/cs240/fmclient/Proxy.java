@@ -3,9 +3,12 @@ package cs240.fmclient;
 
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+
 
 public class Proxy {
     String registerRequest;
@@ -24,8 +27,8 @@ public class Proxy {
             HttpClient client = new HttpClient();
             String loginResponse = client.sendRequest(loginRequest,requestMethod,url,"");
             Gson gson = new Gson();
-            String jsonString = gson.toJson(loginResponse);
-            return jsonString;
+           // String jsonString = gson.toJson(loginResponse);
+            return loginResponse;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -49,8 +52,8 @@ public class Proxy {
             HttpClient client = new HttpClient();
             Request registerRequest = new RegisterRequest(userName, password, email, firstName, lastName, gender);
             String response = client.sendRequest(registerRequest, requestMethod, url, "");
-            String jsonString = gson.toJson(response);
-            return jsonString;
+          //  String jsonString = gson.toJson(response);
+            return response;
         }catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -60,17 +63,17 @@ public class Proxy {
             return null;
         }
     }
-    public String findPersons(String registerResults) {
+    public String findPersons(JSONObject registerResultsJO) {
         try{
             Gson gson = new Gson();
-            String authToken = parseAuthToken(registerResults);
+            String authToken = registerResultsJO.getString("authToken");
             URL url = new URL("http://10.0.2.2:8888/person/"); //changed localhost to 10.0.2.2 /NOTE: NOT USING INPUT VARIABLES FOR URL
             Request blankRequestBody = new Request(); //?
             String requestMethod = "GET";
             HttpClient client = new HttpClient();
             String response = client.sendRequest(blankRequestBody, requestMethod, url, authToken);
-            String jsonString = gson.toJson(response);
-            return jsonString;
+           // String jsonString = gson.toJson(response);
+            return response;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -90,18 +93,18 @@ public class Proxy {
         return sb.toString();
     }
 
-    public String findEvents(String registerResults) {
+    public String findEvents(JSONObject registerResultsJO) {
 
         try {
             Gson gson = new Gson();
-            String authToken = parseAuthToken(registerResults);
+            String authToken = registerResultsJO.getString("authToken");
             URL url = new URL("http://10.0.2.2:8888/event/"); //changed localhost to 10.0.2.2 /NOTE: NOT USING INPUT VARIABLES FOR URL
             Request blankRequestBody = new Request(); //?
             String requestMethod = "GET";
             HttpClient client = new HttpClient();
             String response = client.sendRequest(blankRequestBody, requestMethod, url, authToken);
-            String jsonString = gson.toJson(response);
-            return jsonString;
+           // String jsonString = gson.toJson(response);
+            return response;
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return null;

@@ -1,7 +1,7 @@
 package cs240.fmclient;
 
 
-public class LoginRequest extends Request{
+public class LoginRequest extends Request {
     /** username of existing user */
     private String userName;
     /** password previously created */

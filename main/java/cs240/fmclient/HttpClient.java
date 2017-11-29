@@ -4,15 +4,13 @@ package cs240.fmclient;
 
 import java.io.BufferedWriter;
 
-import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import com.google.gson.*;
-
-import org.json.JSONObject;
 
 public class HttpClient{
     //sendGetRequest--sendPostRequest
@@ -39,9 +37,13 @@ public class HttpClient{
             Scanner in = new Scanner(connection.getInputStream());
             StringBuilder sb = new StringBuilder();
             while(in.hasNext()) {
-                sb.append(in.next());
+                if(in.next() != "\\") {
+                    sb.append(in.next());
+                }
             }
+           // sb.insert(0,'{');
             String responseString = sb.toString();
+            //responseString.charAt(0) = '{';
             return responseString;
 
         } catch (Exception e) {

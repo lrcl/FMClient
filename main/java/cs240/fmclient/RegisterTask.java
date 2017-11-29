@@ -5,51 +5,58 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import org.json.JSONArray;
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import cs240.fmclient.Models.Person;
 
 class RegisterTask extends AsyncTask<String, String, String> {
     String registerResults;
     Context context;
     String familyPersonData;
     String familyEventData;
+    AllPersonsResponse apr;
     @Override
     protected String doInBackground(String... strings) {
         Proxy proxy = new Proxy();
         String firstLast = "";
 
         registerResults = proxy.register(strings);
-        char[] rr = registerResults.toCharArray();
-        if(registerResults.equals("null")) {
+        StringBuilder sb = new StringBuilder(registerResults);
+        sb.insert(0,'{');
+        registerResults = sb.toString();
+        if(registerResults.equals("{\"null\"}")) {
             return "";
         }
         if(registerResults == null) {
             return "";
         }
-        else if(rr[4] != 'm') {
-            System.out.println(registerResults);
-           // new FamilyDataTask().execute(registerResults);
-            familyPersonData = proxy.findPersons(registerResults);
-            familyEventData = proxy.findEvents(registerResults);
+        try {
+            JSONObject registerResultsJO = new JSONObject(registerResults);
+            if(registerResultsJO.has("message")) {
+                return "";
+            }
+            familyPersonData = proxy.findPersons(registerResultsJO);
+            familyEventData = proxy.findEvents(registerResultsJO);
             System.out.println(familyPersonData);
             System.out.println(familyEventData);
-            try {
-                JSONObject jsonPersons = new JSONObject(familyPersonData);
-                JSONObject jsonEvents = new JSONObject(familyEventData);
-                //convert to Person and Event objects? at the very least, pass back to mainactivity
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            Gson gson = new Gson();
+            apr = gson.fromJson(familyPersonData, AllPersonsResponse.class);
+            System.out.println(familyPersonData);
 
-           //
-            StringBuilder sb = new StringBuilder();
-            sb.append(strings[4]);
-            sb.append(" ");
-            sb.append(strings[5]);
-            firstLast = sb.toString();
-            firstLast = firstLast.toUpperCase();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(strings[4]);
+            sb2.append(" ");
+            sb2.append(strings[5]);
+            firstLast = sb2.toString();
+            firstLast = firstLast.toUpperCase();
         return firstLast;
     }
 

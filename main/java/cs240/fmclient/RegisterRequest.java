@@ -1,8 +1,6 @@
 package cs240.fmclient;
 
-/**
- * Created by grant on 11/16/17.
- */
+
 
 class RegisterRequest extends Request {
 
