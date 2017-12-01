@@ -41,8 +41,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private String emailIn;
     private String genderIn;
 
-    public Person[] familyPersons;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater,container,savedInstanceState);
@@ -86,28 +84,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
          if(((Button)v).getText().toString().equals("SIGN IN")) {
             System.out.println("login button clicked");
             String[] userInput = {hostname, portname, username, pword, fname, lname, emailIn, genderIn};
-            LoginTask loginTask = new LoginTask(getActivity().getApplicationContext());
+            LoginTask loginTask = new LoginTask(getActivity().getApplicationContext(), getActivity());
             loginTask.execute(userInput);
         }
         if (((Button)v).getText().toString().equals("REGISTER")) {
             System.out.println("REGISTER BUTTON CLICKED");
             String[] userInput = {hostname, portname, username, pword, fname, lname, emailIn, genderIn};
-            RegisterTask registerTask = new RegisterTask(getActivity().getApplicationContext());
-//            registerTask.dataTransfer = this;
+            RegisterTask registerTask = new RegisterTask(getActivity().getApplicationContext(), getActivity());
             registerTask.execute(userInput);
-//            fragDataTransfer.getRelatives(this.familyPersons);
         }
 //        System.out.println("end method ----------------------");
     }
 
     public LoginFragment() {}
 
-//    @Override
-//    public Person[] getRelatives(AllPersonsResponse apr) {
-//        this.familyPersons = apr.getData();
-//        return familyPersons;
-//    }
-//    public interface FragDataTransfer {
-//        public Person[] getRelatives(Person[] persons);
-//    }
 }

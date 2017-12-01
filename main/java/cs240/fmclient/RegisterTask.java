@@ -1,6 +1,7 @@
 package cs240.fmclient;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ class RegisterTask extends AsyncTask<String, String, String> {
     public String familyEventData;
     public AllPersonsResponse apr;
     public AllEventsResponse aer;
+    public Activity mainActivity;
 //    public TaskDataTransfer dataTransfer;
     @Override
     protected String doInBackground(String... strings) {
@@ -73,7 +75,6 @@ class RegisterTask extends AsyncTask<String, String, String> {
             sb2.append(" ");
             sb2.append(userLname);
             firstLast = sb2.toString();
-            firstLast = firstLast.toUpperCase();
         return firstLast;
     }
 
@@ -90,9 +91,12 @@ class RegisterTask extends AsyncTask<String, String, String> {
             String displayString = "Registered New User" + " "  + firstLast;
             Toast toast2 = Toast.makeText(context, displayString,Toast.LENGTH_LONG );
             toast2.show();
+            //start map fragment
+            ((MainActivity) mainActivity).startMapFragment();
         }
     }
-    public RegisterTask(Context context) {
+    public RegisterTask(Context context, Activity mainActivity) {
         this.context = context;
+        this.mainActivity = mainActivity;
     }
 }

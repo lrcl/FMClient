@@ -1,5 +1,6 @@
 package cs240.fmclient;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -19,6 +20,8 @@ public class LoginTask extends AsyncTask<String, String, String> {
     Context context;
     String familyPersonData;
     String familyEventData;
+    public Activity mainActivity;
+
     @Override
     protected String doInBackground(String... strings) {
         String firstLast = "";
@@ -55,7 +58,7 @@ public class LoginTask extends AsyncTask<String, String, String> {
         if(firstLast.equals("")) {
             //display error message in a toast
             String message = "unsuccessful login";
-            Toast toast1 = Toast.makeText(context,message, Toast.LENGTH_LONG);
+            Toast toast1 = Toast.makeText(context, message, Toast.LENGTH_LONG);
             toast1.show();
         }
         else {
@@ -63,9 +66,12 @@ public class LoginTask extends AsyncTask<String, String, String> {
             String displayString = "Logged in User " + firstLast;
             Toast toast2 = Toast.makeText(context, displayString,Toast.LENGTH_LONG );
             toast2.show();
+            ((MainActivity) mainActivity).startMapFragment();
         }
     }
-    public LoginTask(Context context) {
+    public LoginTask(Context context, Activity mainActivity) {
         this.context = context;
+        this.mainActivity = mainActivity;
+
     }
 }

@@ -11,4 +11,5 @@
     <string name="femaleButton">Female</string>
     <string name="loginButton">SIGN IN</string>
     <string name="registerButton">REGISTER</string>
+    <string name="title_activity_map_fragment">Map</string>
 </resources>
