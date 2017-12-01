@@ -6,6 +6,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
 import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -25,14 +27,19 @@ public class LoginTask extends AsyncTask<String, String, String> {
         if(loginResults.equals("null")) {
             return "";
         }
-        char[] lr = loginResults.toCharArray();
-        if(lr[4] != 'm') {
-            System.out.println(loginResults);
-            //new FamilyDataTask().execute(loginResults);
-//            familyPersonData = proxy.findPersons(strings);
-            System.out.println(familyPersonData);
-//            familyEventData = proxy.findEvents(strings);
-            System.out.println(familyEventData);
+        if(loginResults == null) {
+            return "";
+        }
+        try {
+            JSONObject loginJO = new JSONObject(loginResults);
+            if(loginJO.has("message")) {
+                return "";
+            }
+        }   catch(Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+
             //
             StringBuilder sb = new StringBuilder();
             sb.append(strings[4]);
@@ -40,7 +47,6 @@ public class LoginTask extends AsyncTask<String, String, String> {
             sb.append(strings[5]);
             firstLast = sb.toString();
             firstLast = firstLast.toUpperCase();
-        }
         return firstLast;
     }
 

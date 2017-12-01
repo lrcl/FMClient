@@ -3,6 +3,8 @@ package cs240.fmclient.Models;
 
 public class Person {
 
+    private static Person person;
+
     /**
      * Unique ID for person
      */
@@ -143,7 +145,7 @@ public class Person {
      * @param motherID
      * @param spouseID
      */
-    public Person(String personID, String descendant, String firstName, String lastName, String gender, String fatherID, String motherID, String spouseID) {
+    private Person(String personID, String descendant, String firstName, String lastName, String gender, String fatherID, String motherID, String spouseID) {
         this.personID = personID;
         this.descendant = descendant;
         this.firstName = firstName;
@@ -153,9 +155,16 @@ public class Person {
         this.mother = motherID;
         this.spouse = spouseID;
     }
-    public Person(String personID){
+    private Person(String personID){
         this.personID = personID;
     }
     public Person() {}
+
+//    public static Person getInstance() {
+//        if(person == null) {
+//            person = new Person();
+//        }
+//        return person;
+//    }
 
 }

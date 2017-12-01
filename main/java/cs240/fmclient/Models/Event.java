@@ -3,6 +3,8 @@ package cs240.fmclient.Models;
 
 
 public class Event {
+
+    private static Event event;
     /**
      * unique Id for event
      */
@@ -135,7 +137,7 @@ public class Event {
      * @param eventType
      * @param year
      */
-    public Event(String eventID, String username, String personID, Double latitude, Double longitude, String country, String city, String eventType, int year) {
+    private Event(String eventID, String username, String personID, Double latitude, Double longitude, String country, String city, String eventType, int year) {
         this.eventID = eventID;
         this.descendant = username;
         this.personID = personID;
@@ -146,7 +148,7 @@ public class Event {
         this.eventType = eventType;
         this.year = year;
     }
-    public Event(Event event){
+    private Event(Event event){
         this.eventID = event.eventID;
         this.descendant = event.descendant;
         this.personID = event.personID;
@@ -157,9 +159,16 @@ public class Event {
         this.eventType = event.eventType;
         this.year = event.year;
     }
+    public Event() {}
 
     public void setEventId(String eventID) {
         this.eventID = eventID;
     }
+//    public static Event getInstance() {
+//        if(event == null) {
+//            event = new Event();
+//        }
+//        return event;
+//    }
 }
 

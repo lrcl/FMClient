@@ -42,7 +42,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private String genderIn;
 
     public Person[] familyPersons;
-//    public FragDataTransfer fragDataTransfer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

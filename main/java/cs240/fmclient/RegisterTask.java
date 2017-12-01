@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cs240.fmclient.Interface.TaskDataTransfer;
+import cs240.fmclient.Models.DataHolder;
 import cs240.fmclient.Models.Person;
 
 class RegisterTask extends AsyncTask<String, String, String> {
@@ -23,6 +24,8 @@ class RegisterTask extends AsyncTask<String, String, String> {
 //    public TaskDataTransfer dataTransfer;
     @Override
     protected String doInBackground(String... strings) {
+
+        //REGISTER USER
         Proxy proxy = new Proxy();
         String firstLast = "";
 
@@ -40,12 +43,17 @@ class RegisterTask extends AsyncTask<String, String, String> {
             if(registerResultsJO.has("message")) {
                 return "";
             }
+
+            //GET FAMILY DATA: EVENTS AND PERSONS
             familyPersonData = proxy.findPersons(registerResultsJO);
             familyEventData = proxy.findEvents(registerResultsJO);
             Gson gson = new Gson();
             apr = gson.fromJson(familyPersonData, AllPersonsResponse.class);
             aer = gson.fromJson(familyEventData, AllEventsResponse.class);
-//            dataTransfer.getRelatives(apr); //can I do this here?
+            //store information from database in model classes
+            DataHolder dh = DataHolder.getInstance();
+            dh.setPersonList(apr.getData());
+            dh.setEventList(aer.getData());
 
 
 
@@ -54,10 +62,16 @@ class RegisterTask extends AsyncTask<String, String, String> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //get user for displaying toast
+            Person[] personList = apr.getData();
+            Person person = personList[0];
+            String userFname = person.getFirstName();
+            String userLname = person.getLastName();
+
             StringBuilder sb2 = new StringBuilder();
-            sb2.append(strings[4]);
+            sb2.append(userFname);
             sb2.append(" ");
-            sb2.append(strings[5]);
+            sb2.append(userLname);
             firstLast = sb2.toString();
             firstLast = firstLast.toUpperCase();
         return firstLast;
