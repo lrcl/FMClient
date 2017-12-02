@@ -23,10 +23,12 @@ class RegisterTask extends AsyncTask<String, String, String> {
     public AllPersonsResponse apr;
     public AllEventsResponse aer;
     public Activity mainActivity;
+    JSONObject registerResultsJO;
 //    public TaskDataTransfer dataTransfer;
     @Override
     protected String doInBackground(String... strings) {
-
+        String userFname = "";
+        String userLname = "";
         //REGISTER USER
         Proxy proxy = new Proxy();
         String firstLast = "";
@@ -41,7 +43,7 @@ class RegisterTask extends AsyncTask<String, String, String> {
             return "";
         }
         try {
-            JSONObject registerResultsJO = new JSONObject(registerResults);
+            registerResultsJO = new JSONObject(registerResults);
             if(registerResultsJO.has("message")) {
                 return "";
             }
@@ -66,9 +68,12 @@ class RegisterTask extends AsyncTask<String, String, String> {
         }
         //get user for displaying toast
             Person[] personList = apr.getData();
+        if(personList.length > 1) {
             Person person = personList[0];
-            String userFname = person.getFirstName();
-            String userLname = person.getLastName();
+            userFname = person.getFirstName();
+            userLname = person.getLastName();
+        }
+
 
             StringBuilder sb2 = new StringBuilder();
             sb2.append(userFname);
@@ -80,7 +85,7 @@ class RegisterTask extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String firstLast) {
-        if(firstLast.equals("")) {
+        if(registerResultsJO.has("message") || registerResultsJO == null) {
             //display error message in a toast
             String message = "unable to register";
             Toast toast1 = Toast.makeText(context,message, Toast.LENGTH_LONG);

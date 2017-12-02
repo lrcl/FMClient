@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import cs240.fmclient.Models.Person;
+
 
 public class Proxy {
     String registerRequest;
@@ -79,19 +81,7 @@ public class Proxy {
             return null;
         }
     }
-    private String parseAuthToken(String info) {
-        //18-24
-        StringBuilder sb = new StringBuilder();
-        sb.append(info.charAt(18));
-        sb.append(info.charAt(19));
-        sb.append(info.charAt(20));
-        sb.append(info.charAt(21));
-        sb.append(info.charAt(22));
-        sb.append(info.charAt(23));
-        sb.append(info.charAt(24));
 
-        return sb.toString();
-    }
 
     public String findEvents(JSONObject registerResultsJO) {
 
@@ -113,6 +103,9 @@ public class Proxy {
             return null;
         }
 
+    }
+    public Person getPerson(JSONObject loginJO) {
+        return null; //GET THIS FOR DISPLAYING LOGGED IN PERSON
     }
 }
 

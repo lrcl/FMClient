@@ -1,18 +1,26 @@
 package cs240.fmclient;
 
+import android.graphics.Camera;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import static com.google.android.gms.maps.model.BitmapDescriptorFactory.defaultMarker;
+import static com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_BLUE;
+
+
 
 public class MapFragment extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    private GoogleMap map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +44,27 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback 
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        map = googleMap;
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //CameraUpdate update = CameraUpdateFactory.zoomTo(10);
+       // googleMap.moveCamera(update);
     }
+
+    void setClickListener() {
+        map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+            }
+        });
+    }
+    LatLng macomb = new LatLng(42,-82);
+    MarkerOptions options = new MarkerOptions().position(macomb).title("Macomb").icon(defaultMarker(HUE_BLUE));
+    Marker marker = map.addMarker(options);
+    //marker.setTag("Macomb");
     public MapFragment() {}
 }

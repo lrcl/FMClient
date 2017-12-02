@@ -21,11 +21,14 @@ public class LoginTask extends AsyncTask<String, String, String> {
     String familyPersonData;
     String familyEventData;
     public Activity mainActivity;
+    JSONObject loginJO;
 
     @Override
     protected String doInBackground(String... strings) {
         String firstLast = "";
         Proxy proxy = new Proxy();
+        String first = "";
+        String last = "";
         loginResults = proxy.login(strings);
         if(loginResults.equals("null")) {
             return "";
@@ -34,7 +37,7 @@ public class LoginTask extends AsyncTask<String, String, String> {
             return "";
         }
         try {
-            JSONObject loginJO = new JSONObject(loginResults);
+            loginJO = new JSONObject(loginResults);
             if(loginJO.has("message")) {
                 return "";
             }
@@ -42,20 +45,26 @@ public class LoginTask extends AsyncTask<String, String, String> {
             e.printStackTrace();
             return "";
         }
-
-            //
-            StringBuilder sb = new StringBuilder();
-            sb.append(strings[4]);
+        StringBuilder sb = new StringBuilder();
+        if(strings.length >= 5) {
+            first = strings[4];
+            sb.append(first);
             sb.append(" ");
-            sb.append(strings[5]);
-            firstLast = sb.toString();
-            firstLast = firstLast.toUpperCase();
+
+
+        }
+        if(strings.length >= 6) {
+            last = strings[5];
+            sb.append(last);
+
+        }
+        firstLast = sb.toString();
         return firstLast;
     }
 
     @Override
     protected void onPostExecute(String firstLast) {
-        if(firstLast.equals("")) {
+        if(loginJO.has("message") || loginJO == null) {
             //display error message in a toast
             String message = "unsuccessful login";
             Toast toast1 = Toast.makeText(context, message, Toast.LENGTH_LONG);
