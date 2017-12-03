@@ -13,6 +13,8 @@ import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import cs240.fmclient.Models.DataHolder;
+
 
 public class LoginTask extends AsyncTask<String, String, String> {
 
@@ -20,7 +22,11 @@ public class LoginTask extends AsyncTask<String, String, String> {
     Context context;
     String familyPersonData;
     String familyEventData;
+    public AllPersonsResponse apr;
+    public AllEventsResponse aer;
     public Activity mainActivity;
+
+    DataHolder dh;
 
     private JSONObject loginJO;
     @Override
@@ -39,18 +45,29 @@ public class LoginTask extends AsyncTask<String, String, String> {
             if(loginJO.has("message")) {
                 return "";
             }
+            //GET FAMILY DATA: EVENTS AND PERSONS
+            familyPersonData = proxy.findPersons(loginJO);
+            familyEventData = proxy.findEvents(loginJO);
+            Gson gson = new Gson();
+            apr = gson.fromJson(familyPersonData, AllPersonsResponse.class);
+            aer = gson.fromJson(familyEventData, AllEventsResponse.class);
+            //store information from database in model classes
+            dh = DataHolder.getInstance();
+            dh.setPersonList(apr.getData());
+            dh.setEventList(aer.getData());
         }   catch(Exception e) {
             e.printStackTrace();
             return "";
         }
 
             //
-            StringBuilder sb = new StringBuilder();
-            sb.append(strings[4]);
-            sb.append(" ");
-            sb.append(strings[5]);
-            firstLast = sb.toString();
-            firstLast = firstLast.toUpperCase();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(strings[4]);
+        sb.append(" ");
+        sb.append(strings[5]);
+        firstLast = sb.toString();
+        firstLast = firstLast.toUpperCase();
         return firstLast;
     }
 

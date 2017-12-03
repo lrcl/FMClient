@@ -11,12 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-
-import java.util.ArrayList;
-
-import cs240.fmclient.Interface.TaskDataTransfer;
-import cs240.fmclient.Models.Person;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
 

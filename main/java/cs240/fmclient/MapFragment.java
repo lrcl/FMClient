@@ -2,6 +2,9 @@ package cs240.fmclient;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,9 +13,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import cs240.fmclient.Models.DataHolder;
+import cs240.fmclient.Models.Event;
+import cs240.fmclient.Models.Person;
+
 public class MapFragment extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    DataHolder dh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +30,7 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
@@ -38,10 +47,41 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        loadEventsToMap();
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+       // LatLng sydney = new LatLng(-34, 151);
+        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+    public void loadEventsToMap() {
+        dh = DataHolder.getInstance();
+        Event[] eventList = dh.getEventList();
+        Person[] personList = dh.getPersonList();
+        for(Event event: eventList) {
+            LatLng event1 = new LatLng(event.getLatitude(),event.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(event1).title(event.getCity()));
+            //mMap.moveCamera(CameraUpdateFactory.newLatLng(event1));
+        }
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.map_toolbar, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.search:
+                //start search activity
+                return true;
+            case R.id.settings:
+                //start settings activity
+                return true;
+        }
+        return true;
     }
     public MapFragment() {}
 }

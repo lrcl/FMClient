@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cs240.fmclient.Interface.TaskDataTransfer;
 import cs240.fmclient.Models.DataHolder;
 import cs240.fmclient.Models.Person;
 
