@@ -1,4 +1,4 @@
-package cs240.fmclient;
+package cs240.fmclient.ServerConnection;
 
 
 import com.google.gson.Gson;
@@ -8,6 +8,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import cs240.fmclient.JsonHandling.RegisterRequest;
+import cs240.fmclient.JsonHandling.RegisterResponse;
+import cs240.fmclient.JsonHandling.Request;
+import cs240.fmclient.JsonHandling.LoginRequest;
 
 
 public class Proxy {

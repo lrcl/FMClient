@@ -1,7 +1,7 @@
-package cs240.fmclient;
+package cs240.fmclient.JsonHandling;
 
 
-class Response {
+public class Response {
 
  //   private String response;
   //  private String authToken;

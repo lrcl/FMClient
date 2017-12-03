@@ -1,4 +1,4 @@
-package cs240.fmclient;
+package cs240.fmclient.JsonHandling;
 
 
 public class LoginRequest extends Request {

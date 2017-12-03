@@ -3,6 +3,8 @@ package cs240.fmclient;
 
 import android.os.AsyncTask;
 
+import cs240.fmclient.ServerConnection.Proxy;
+
 public class FamilyDataTask extends AsyncTask<String, String, String> {
     protected String familyPersonData;
     protected String familyEventData;

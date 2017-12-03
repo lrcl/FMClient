@@ -1,4 +1,6 @@
-package cs240.fmclient;
+package cs240.fmclient.JsonHandling;
+
+import cs240.fmclient.JsonHandling.Response;
 
 public class RegisterResponse extends Response {
     /** auth token */

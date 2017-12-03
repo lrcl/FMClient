@@ -1,4 +1,4 @@
-package cs240.fmclient;
+package cs240.fmclient.ServerConnection;
 
 
 
@@ -8,9 +8,10 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import com.google.gson.*;
+
+import cs240.fmclient.JsonHandling.Request;
 
 public class HttpClient{
     //sendGetRequest--sendPostRequest

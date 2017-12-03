@@ -1,8 +1,9 @@
-package cs240.fmclient;
+package cs240.fmclient.JsonHandling;
 
 
+import cs240.fmclient.JsonHandling.Request;
 
-class RegisterRequest extends Request {
+public class RegisterRequest extends Request {
 
     String userName;
     String password;

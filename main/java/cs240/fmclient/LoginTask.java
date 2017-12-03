@@ -9,11 +9,10 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
-import java.sql.Connection;
-import java.util.ArrayList;
-
+import cs240.fmclient.JsonHandling.AllEventsResponse;
+import cs240.fmclient.JsonHandling.AllPersonsResponse;
 import cs240.fmclient.Models.DataHolder;
+import cs240.fmclient.ServerConnection.Proxy;
 
 
 public class LoginTask extends AsyncTask<String, String, String> {

@@ -1,4 +1,4 @@
-package cs240.fmclient;
+package cs240.fmclient.JsonHandling;
 
 import cs240.fmclient.Models.Person;
 

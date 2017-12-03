@@ -11,8 +11,11 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cs240.fmclient.JsonHandling.AllEventsResponse;
+import cs240.fmclient.JsonHandling.AllPersonsResponse;
 import cs240.fmclient.Models.DataHolder;
 import cs240.fmclient.Models.Person;
+import cs240.fmclient.ServerConnection.Proxy;
 
 class RegisterTask extends AsyncTask<String, String, String> {
     public String registerResults;
