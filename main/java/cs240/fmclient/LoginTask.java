@@ -27,8 +27,8 @@ public class LoginTask extends AsyncTask<String, String, String> {
     protected String doInBackground(String... strings) {
         String firstLast = "";
         Proxy proxy = new Proxy();
-        String first = "";
-        String last = "";
+        String first = "empty";
+        String last = "empty";
         loginResults = proxy.login(strings);
         if(loginResults.equals("null")) {
             return "";
@@ -64,7 +64,7 @@ public class LoginTask extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String firstLast) {
-        if(loginJO.has("message") || loginJO == null) {
+        if(loginJO.has("message") || loginJO == null || !loginJO.has("authToken")) {
             //display error message in a toast
             String message = "unsuccessful login";
             Toast toast1 = Toast.makeText(context, message, Toast.LENGTH_LONG);

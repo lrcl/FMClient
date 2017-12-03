@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import cs240.fmclient.Models.Person;
+import com.google.android.gms.maps.GoogleMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startMapFragment() {
-       startActivity(new Intent(getApplicationContext(), MapFragment.class));
+
+       Intent i = new Intent(this, MapFragment.class);
+       startActivity(i);
     }
 
 }

@@ -85,7 +85,7 @@ class RegisterTask extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String firstLast) {
-        if(registerResultsJO.has("message") || registerResultsJO == null) {
+        if(registerResultsJO.has("message") || registerResultsJO == null || !registerResultsJO.has("authToken")) {
             //display error message in a toast
             String message = "unable to register";
             Toast toast1 = Toast.makeText(context,message, Toast.LENGTH_LONG);

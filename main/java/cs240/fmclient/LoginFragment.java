@@ -41,6 +41,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private String emailIn;
     private String genderIn;
 
+    MainActivity mainActivity;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater,container,savedInstanceState);
