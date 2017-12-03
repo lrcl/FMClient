@@ -23,6 +23,8 @@ class RegisterTask extends AsyncTask<String, String, String> {
     public AllPersonsResponse apr;
     public AllEventsResponse aer;
     public Activity mainActivity;
+
+    public JSONObject registerResultsJO;
 //    public TaskDataTransfer dataTransfer;
     @Override
     protected String doInBackground(String... strings) {
@@ -41,7 +43,7 @@ class RegisterTask extends AsyncTask<String, String, String> {
             return "";
         }
         try {
-            JSONObject registerResultsJO = new JSONObject(registerResults);
+             registerResultsJO = new JSONObject(registerResults);
             if(registerResultsJO.has("message")) {
                 return "";
             }
@@ -80,7 +82,7 @@ class RegisterTask extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String firstLast) {
-        if(firstLast.equals("")) {
+        if(!registerResultsJO.has("authToken")) {
             //display error message in a toast
             String message = "unable to register";
             Toast toast1 = Toast.makeText(context,message, Toast.LENGTH_LONG);

@@ -22,6 +22,7 @@ public class LoginTask extends AsyncTask<String, String, String> {
     String familyEventData;
     public Activity mainActivity;
 
+    private JSONObject loginJO;
     @Override
     protected String doInBackground(String... strings) {
         String firstLast = "";
@@ -34,7 +35,7 @@ public class LoginTask extends AsyncTask<String, String, String> {
             return "";
         }
         try {
-            JSONObject loginJO = new JSONObject(loginResults);
+            loginJO = new JSONObject(loginResults);
             if(loginJO.has("message")) {
                 return "";
             }
@@ -55,7 +56,7 @@ public class LoginTask extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String firstLast) {
-        if(firstLast.equals("")) {
+        if(!loginJO.has("authToken")) {
             //display error message in a toast
             String message = "unsuccessful login";
             Toast toast1 = Toast.makeText(context, message, Toast.LENGTH_LONG);
