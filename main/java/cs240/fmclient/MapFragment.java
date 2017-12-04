@@ -2,6 +2,8 @@ package cs240.fmclient;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatCallback;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,7 +20,7 @@ import cs240.fmclient.Models.DataHolder;
 import cs240.fmclient.Models.Event;
 import cs240.fmclient.Models.Person;
 
-public class MapFragment extends FragmentActivity implements OnMapReadyCallback {
+public class MapFragment extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     DataHolder dh;
@@ -27,14 +29,10 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map_fragment);
-        //add toolbar
-       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setActionBar(toolbar);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 

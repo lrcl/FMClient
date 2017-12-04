@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuInflater;
 
 import cs240.fmclient.Models.Person;
@@ -28,5 +29,6 @@ public class MainActivity extends AppCompatActivity {
     public void startMapFragment() {
        startActivity(new Intent(getApplicationContext(), MapFragment.class));
     }
+
 
 }
