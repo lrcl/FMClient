@@ -18,6 +18,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:textSize="12pt" />
+        android:textSize="10pt" />
+    <ImageView
+        android:id="@+id/mapEventDisplayIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 
 </LinearLayout>

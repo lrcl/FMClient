@@ -1,11 +1,14 @@
 package cs240.fmclient;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -16,18 +19,23 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.FontAwesomeIcons;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
 import cs240.fmclient.Models.DataHolder;
 import cs240.fmclient.Models.Event;
 import cs240.fmclient.Models.Person;
 
 public class MapFragment extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
-
+//this needs to be a fragment -----------------------------
     private GoogleMap mMap;
     DataHolder dh;
     Event[] eventList;
     Person[] personList;
     TextView eventInfo;
+    ImageView image;
     View view;
 
     @Override
@@ -40,6 +48,7 @@ public class MapFragment extends AppCompatActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         view =  mapFragment.getView();
         eventInfo = findViewById(R.id.eventInfoDisplay);
+        image = findViewById(R.id.mapEventDisplayIcon);
     }
 
 
@@ -86,7 +95,6 @@ public class MapFragment extends AppCompatActivity implements OnMapReadyCallback
 
             Marker marker = mMap.addMarker(options);
             marker.setTag(event.getEventID());
-            //mMap.moveCamera(CameraUpdateFactory.newLatLng(event1));
         }
 
     }
@@ -114,15 +122,73 @@ public class MapFragment extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public boolean onMarkerClick(Marker marker) {
         String eventID = (String) marker.getTag();
+        Iconify.with(new FontAwesomeModule());
         Event currentEvent = null;
+        int count = 0;
         for(Event event: eventList) {
             if(event.getEventID().equals(eventID)) {
                 currentEvent = event;
+                count++;
+                break;
             }
         }
+        String gender = "";
+        String descendant = "";
+        Person currentPerson = null;
+        int counter = 0;
+        for(Person person: personList) {
+            if(person.getPersonID().equals(currentEvent.getPersonID())) {
+                currentPerson = person;
+                counter++;
+                break;
+            }
+            if(person.getFatherID() != null) {
+                if (person.getFatherID().equals(currentEvent.getPersonID())) {
+                    currentPerson = person;
+                    counter++;
+                    break;
+                }
+            }
+            if(person.getMotherID() != null) {
+                if (person.getMotherID().equals(currentEvent.getPersonID())) {
+                    currentPerson = person;
+                    counter++;
+                    break;
+                }
+            }
+            if(person.getSpouseID() != null) {
+                if (person.getSpouseID().equals(currentEvent.getPersonID())) {
+                    currentPerson = person;
+                    counter++;
+                    break;
+                }
+            }
+        }
+        gender = currentPerson.getGender();
+
+        if(gender.equals("f")) {
+            Drawable icon = new IconDrawable(this, FontAwesomeIcons.fa_female)
+                    .colorRes(R.color.red)
+                    .sizeDp(30);
+            image.setImageDrawable(icon);
+        }
+        if(gender.equals("m")) {
+            Drawable icon = new IconDrawable(this, FontAwesomeIcons.fa_male)
+                    .colorRes(R.color.blue)
+                    .sizeDp(30);
+            image.setImageDrawable(icon);
+        }
+        displayEventInfo(currentEvent,currentPerson);
+        return true;
+    }
+    public void displayEventInfo(Event currentEvent, Person currentPerson) {
         //display person first and last name
         //display event type, city, country, year
         StringBuilder sb = new StringBuilder();
+        sb.append(currentPerson.getFirstName());
+        sb.append(" ");
+        sb.append(currentPerson.getLastName());
+        sb.append('\n');
         sb.append(currentEvent.getEventType());
         sb.append(": ");
         sb.append(currentEvent.getCity());
@@ -131,6 +197,8 @@ public class MapFragment extends AppCompatActivity implements OnMapReadyCallback
         sb.append(" ");
         sb.append(currentEvent.getYear());
         eventInfo.setText(sb.toString());
-        return false;
+        LatLng latLng = new LatLng(currentEvent.getLatitude(),currentEvent.getLongitude());
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
     }
 }

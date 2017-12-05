@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startMapFragment() {
+        //this needs to be a fragment
        startActivity(new Intent(getApplicationContext(), MapFragment.class));
     }
 
