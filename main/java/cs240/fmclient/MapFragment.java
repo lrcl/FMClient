@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -67,6 +68,7 @@ public class MapFragment extends AppCompatActivity implements OnMapReadyCallback
 
         loadEventsToMap();
         mMap.setOnMarkerClickListener(this);
+        eventInfo.setText("Click on any pin");
 
         // Add a marker in Sydney and move the camera
        // LatLng sydney = new LatLng(-34, 151);
@@ -121,9 +123,52 @@ public class MapFragment extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+        //match clicked event with event from model class
         String eventID = (String) marker.getTag();
-        Iconify.with(new FontAwesomeModule());
         Event currentEvent = null;
+        currentEvent = matchEventID(currentEvent, eventID);
+
+        //retrieve person of event for display
+        String gender = "";
+        Person currentPerson = null;
+        currentPerson = matchPersonID(currentEvent, currentPerson);
+        gender = currentPerson.getGender();
+
+        //display gender matched icon
+        displayGenderIcon(gender);
+
+        displayEventInfo(currentEvent,currentPerson);
+        return true;
+    }
+    public void displayEventInfo(Event currentEvent, Person currentPerson) {
+        //display person first and last name
+        //display event type, city, country, year
+        StringBuilder sb = new StringBuilder();
+        sb.append(currentPerson.getFirstName());
+        sb.append(" ");
+        sb.append(currentPerson.getLastName());
+        sb.append('\n');
+        sb.append(currentEvent.getEventType());
+        sb.append(": ");
+        sb.append(currentEvent.getCity());
+        sb.append(", ");
+        sb.append(currentEvent.getCountry());
+        sb.append(" ");
+        sb.append(currentEvent.getYear());
+        eventInfo.setText(sb.toString());
+
+        //optional functionality here
+        center(currentEvent);
+
+    }
+    public void center(Event currentEvent) {
+        LatLng latLng = new LatLng(currentEvent.getLatitude(),currentEvent.getLongitude());
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+       // CameraUpdate update = CameraUpdateFactory.zoomTo(3);
+       // mMap.moveCamera(update);
+
+    }
+    public Event matchEventID(Event currentEvent, String eventID) {
         int count = 0;
         for(Event event: eventList) {
             if(event.getEventID().equals(eventID)) {
@@ -132,9 +177,9 @@ public class MapFragment extends AppCompatActivity implements OnMapReadyCallback
                 break;
             }
         }
-        String gender = "";
-        String descendant = "";
-        Person currentPerson = null;
+        return currentEvent;
+    }
+    public Person matchPersonID(Event currentEvent, Person currentPerson){
         int counter = 0;
         for(Person person: personList) {
             if(person.getPersonID().equals(currentEvent.getPersonID())) {
@@ -164,8 +209,10 @@ public class MapFragment extends AppCompatActivity implements OnMapReadyCallback
                 }
             }
         }
-        gender = currentPerson.getGender();
-
+        return currentPerson;
+    }
+    public void displayGenderIcon(String gender){
+        Iconify.with(new FontAwesomeModule());
         if(gender.equals("f")) {
             Drawable icon = new IconDrawable(this, FontAwesomeIcons.fa_female)
                     .colorRes(R.color.red)
@@ -178,27 +225,5 @@ public class MapFragment extends AppCompatActivity implements OnMapReadyCallback
                     .sizeDp(30);
             image.setImageDrawable(icon);
         }
-        displayEventInfo(currentEvent,currentPerson);
-        return true;
-    }
-    public void displayEventInfo(Event currentEvent, Person currentPerson) {
-        //display person first and last name
-        //display event type, city, country, year
-        StringBuilder sb = new StringBuilder();
-        sb.append(currentPerson.getFirstName());
-        sb.append(" ");
-        sb.append(currentPerson.getLastName());
-        sb.append('\n');
-        sb.append(currentEvent.getEventType());
-        sb.append(": ");
-        sb.append(currentEvent.getCity());
-        sb.append(", ");
-        sb.append(currentEvent.getCountry());
-        sb.append(" ");
-        sb.append(currentEvent.getYear());
-        eventInfo.setText(sb.toString());
-        LatLng latLng = new LatLng(currentEvent.getLatitude(),currentEvent.getLongitude());
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-
     }
 }
